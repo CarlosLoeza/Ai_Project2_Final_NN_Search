@@ -10,15 +10,6 @@ using namespace std;
 
 
 
-void leave_one(vector<vector<double>> use){
-    
-    
-    
-}
-
-
-
-
 int main(){
     
     Classifier test;
@@ -74,63 +65,28 @@ int main(){
         cout << it << endl;
     cout << endl;
     
-    
-    
+
     // place our data in vectors
     //test.Train(data_path);
     // normalize vectors and update our dataset to be normalized
     set = test.Normalize(set);
-//    // test: check if normalized
+    // test: check if normalized
     cout << endl;
     
     for (auto it: set[3])
         cout << it << " - " << endl;
     // test: subset
-    vector<int> subset = {3, 6, 9};
-//
-//
-    int accuracy;
+    vector<int> subset = {3, 5, 7};
+
+    double accuracy;
     
     accuracy = val.Leave_One_Out(subset, set);
     
-    cout << "accuracy: "<< accuracy << endl;
+    cout << "accuracy: " << accuracy << endl;
 
     // ---------------------------------------------
     
-    
-//    // test: print out features in the specific vector
-//    for(auto it: feature1){
-//        cout << it << endl;
-//    }
-    
-//    double new_val;
-//    double val = 2.61;
-//    double euclid_distance =0;
-//    double max = 100;
-//    double dist = 100;
-//    int cl;
-//
-//    vector<double> c =feature1;
-//
-//    for (int i = 0; i < c.size(); i++){
-//
-//        euclid_distance = sqrt(pow((c[i]-val), 2));
-//        //cout << "------------------" << endl;
-//        //cout << "Curr: " << c[i] << endl;
-//        //cout << "Max: " << max << endl;
-//        if(euclid_distance < dist){
-//            dist = euclid_distance;
-//            new_val = feature1[i];
-//            cl = i;
-//            //cout << "Feature: " << new_val << endl;
-//
-//        }
-//    }
-//    cout << "Original value: " << val << endl;
-//    cout << "Value found: " << new_val << endl;
-//    cout << "Index i: " << cl << endl;
-//    cout << "Euclidean Distance: " << dist << endl;
-//    cout << "Class: " << classification[cl] << endl;
+
     
     return 0;
 }
