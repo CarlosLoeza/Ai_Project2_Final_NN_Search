@@ -63,11 +63,11 @@
 		0794C9D3266F22ED00A81BEC /* Project2_Final_NN_Search */ = {
 			isa = PBXGroup;
 			children = (
+				0794C9D4266F22ED00A81BEC /* main.cpp */,
 				0794C9E3266F23D900A81BEC /* Classifier.hpp */,
 				0794C9DE266F23BE00A81BEC /* Classifier.cpp */,
 				0794C9DF266F23BE00A81BEC /* Validator.cpp */,
 				0794C9DD266F23BE00A81BEC /* Validator.hpp */,
-				0794C9D4266F22ED00A81BEC /* main.cpp */,
 			);
 			path = Project2_Final_NN_Search;
 			sourceTree = "<group>";

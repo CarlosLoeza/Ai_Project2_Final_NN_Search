@@ -60,33 +60,99 @@ void Classifier::Train(vector<double> train_set){
 vector<vector<double>> Classifier::Normalize(vector<vector<double>> set){
     
     // sum of the values squared. We will get the square root of the sum later in order to normalize vector
-    double sum_of_sqr_values = 0;
+    double sum_of_values = 0;
     // holds the result once we square sum_of_sqr_values
     double squared_sum_result;
     // holds current feature aka column
     vector<double> curr_feat;
+    // hold mean
+    double mean;
+    // (value-mean)^2
+    double val_mean_sqr=0;
+    double sqr_val;
+    double std;
+    
+    double min = 2;
+    double max = -1;
     
     
     for(int i = 1; i < set.size(); i++){
         // current feature column
         curr_feat = set[i];
-        // get the sum of squares for each value in the feature vector
-        for(int j = 0; j < curr_feat.size(); j++){
-            //get sum of square values
-            sum_of_sqr_values += curr_feat[j] * curr_feat[j];
+        
+
+        for(int j = 0; j < curr_feat.size()-1; j++){
+            val_mean_sqr += curr_feat[j] * curr_feat[j];
         }
-        // square our sum
-        squared_sum_result = sqrt(sum_of_sqr_values);
+
+        sqr_val = sqrt(val_mean_sqr);
+        
+        for(int j =0; j<curr_feat.size()-1; j++){
+            curr_feat[j] = curr_feat[j]/sqr_val;
+            
+        }
+        
+        /*
+        // -------------------------------------------------
+        
+        // get the sum of squares for each value in the feature vector
+        for(int j = 0; j < curr_feat.size()-1; j++){
+            //get sum of square values
+            sum_of_values += curr_feat[j];
+        }
+        
+        mean = sum_of_values/ curr_feat.size()-1;
+        
+        
+        for(int j=0; j<curr_feat.size()-1; j++){
+            val_mean_sqr += ((curr_feat[j] - mean)* (curr_feat[j] - mean));
+            
+        }
+        cout << "val mean sqr: " << val_mean_sqr << endl;
+        cout << "cur.size: " << curr_feat.size()-1 << endl;
+        sqr_val = val_mean_sqr / curr_feat.size()-1;
+        
+        std = sqrt(sqr_val);
+        
+        cout << "std: " << std << endl;
+
         // normalize value in feature vector
         for(int j = 0; j < curr_feat.size(); j++ ){
-            curr_feat[j] = curr_feat[j] / squared_sum_result;
+            curr_feat[j] = (curr_feat[j] - mean) / std;
         }
+         
+         
+        */
+         
         // replace original feature column with normalized version
         set[i] = curr_feat;
         // reset variables in order to reuse
-        sum_of_sqr_values =0;
+        sum_of_values =0;
+        val_mean_sqr = 0;
         curr_feat = {};
     }
+    
+    
+//    for(int i = 1; i < set.size(); i++){
+//        // current feature column
+//        curr_feat = set[i];
+//        // get the sum of squares for each value in the feature vector
+//        for(int j = 0; j < curr_feat.size(); j++){
+//            //get sum of square values
+//            sum_of_sqr_values += curr_feat[j] * curr_feat[j];
+//        }
+//        // square our sum
+//        squared_sum_result = sqrt(sum_of_sqr_values);
+//        // normalize value in feature vector
+//        for(int j = 0; j < curr_feat.size(); j++ ){
+//            curr_feat[j] = curr_feat[j] / squared_sum_result;
+//        }
+//        // replace original feature column with normalized version
+//        set[i] = curr_feat;
+//        // reset variables in order to reuse
+//        sum_of_sqr_values =0;
+//        curr_feat = {};
+//    }
     
     return set;
 }

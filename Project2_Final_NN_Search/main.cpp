@@ -6,8 +6,17 @@
 #include "Classifier.hpp"
 #include "Validator.hpp"
 
-
 using namespace std;
+
+
+
+void leave_one(vector<vector<double>> use){
+    
+    
+    
+}
+
+
 
 
 int main(){
@@ -61,6 +70,9 @@ int main(){
     set.push_back(feature10);
     
     
+    for (auto it: set[3])
+        cout << it << endl;
+    cout << endl;
     
     
     
@@ -69,93 +81,20 @@ int main(){
     // normalize vectors and update our dataset to be normalized
     set = test.Normalize(set);
 //    // test: check if normalized
+    cout << endl;
+    
     for (auto it: set[3])
-        cout << it << endl;
+        cout << it << " - " << endl;
     // test: subset
-//    vector<vector<double>> subset = {test.set[3], test.set[6], test.set[9]};
+    vector<int> subset = {3, 6, 9};
 //
-//    val.Leave_One_Out(subset);
+//
+    int accuracy;
     
-    double min_dist = 1;
-    int index;
-    double value;
-    double temp_dist;
-    int orig_cls;
-    int cls;
-    int correct =0;
+    accuracy = val.Leave_One_Out(subset, set);
     
-    for(int i = 0; i < set[7].size()-1; i++){
-        orig_cls = set[0][i];
-        for(int j = 0; j < set[7].size()-1; j++){
-            if(i != j){
-                temp_dist = abs(set[7][i] - set[7][j]);
-                if(temp_dist < min_dist){
-                    min_dist = temp_dist;
-                    index = j;
-                    value = set[7][j];
-                    cls = set[0][j];
-                }
-            }
-        }
-        
-        if(orig_cls == cls)
-            correct++;
-        
-        cout << "Orig index: " << i << endl;
-        cout << "Orig value: " << set[7][i] << endl;
-        cout << "Orig class: " << set[0][i] << endl;
-        cout << "Min dist: " << min_dist << endl;
-        cout << "Index: " << index << endl;
-        cout << "Value: " << value << endl;
-        cout << "Predicted class: " << cls << endl;
-        cout << "---------------------" << endl;
-        
-   
-        
-        min_dist = 1;
-        
-    }
-    
-    cout << "Correct: " << correct;
-    
+    cout << "accuracy: "<< accuracy << endl;
 
-    
-    
-    //vector<double> feat1 = test.feature1;
-
-    
-    
-    
-    //Thus, if feature_1 = [ N1, N2, N3, ..., Nn]
-    //normalized_feature_1 = [(N1 - mean(feature_1) / std(feature_1), ..., (Nn - mean(feature_1) / std(feature_1)]
-
-    // sum of the values squared. We will get the square root of the sum later in order to normalize vector
-//    double sum_of_sqr_values = 0;
-//    // holds the result once we square sum_of_sqr_values
-//    double squared_sum_result;
-//
-//    for(auto it: feat1){
-//        cout << it << endl;
-//    }
-//
-//    cout << endl;
-//
-//    //get sum of square values
-//    for (int i = 0; i< feat1.size(); i++){
-//        sum_of_sqr_values += feat1[i]*feat1[i];
-//    }
-//
-//    squared_sum_result = sqrt(sum_of_sqr_values);
-//
-//    // Normalize each value in vector and update
-//    for(int i = 0; i < feat1.size(); i++){
-//        feat1[i] = feat1[i] / squared_sum_result;
-//    }
-//
-//    for(auto it: feat1){
-//        cout << it << endl;
-//    }
-//
     // ---------------------------------------------
     
     

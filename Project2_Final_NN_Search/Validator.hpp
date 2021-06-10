@@ -15,7 +15,7 @@ using namespace std;
 
 class Validator{
 public:
-    void Leave_One_Out(vector<vector<double>> subset);
+    int Leave_One_Out(vector<int> subset, vector<vector<double>> set);
     
     
 };
