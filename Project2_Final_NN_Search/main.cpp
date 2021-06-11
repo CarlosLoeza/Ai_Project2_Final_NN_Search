@@ -40,10 +40,15 @@ int main(){
     vector<vector<double>> columns;
     double accuracy;
     int data_size;
+    int data_instances;
     
     cout << "Enter 11 for small dataset or enter 41 for large dataset: ";
     cin >> data_size;
     
+    if(data_size == 11)
+        data_instances = 100;
+    else
+        data_instances = 1000;
     
     
     // create 41 empty temp variables to hold an instance from a feature column
@@ -117,7 +122,6 @@ int main(){
             for(int i = i_val; i<i_less; i++){
                 // create a new vector by inserting or removing i (based on forward or backward selection)
                 temp_vector = search.make_temp_vector(init, i, user_algorithm_pick);
-
                 
                 temp_vector_score = val.Leave_One_Out(temp_vector, set);
 
@@ -144,7 +148,7 @@ int main(){
                     if(!(find(curr_max.begin(), curr_max.end(), i) != curr_max.end())){
                         // create a new vector by inserting i (forward selection)
                         temp_vector = search.make_temp_vector(curr_max, i, user_algorithm_pick);
-                        temp_vector_score = val.Leave_One_Out(temp_vector, set);
+                        temp_vector_score = val.Leave_One_Out(temp_vector, set) ;
                         // print features and accuracy of current set
                         search.print_features_and_accurary(temp_vector,temp_vector_score);
                         
