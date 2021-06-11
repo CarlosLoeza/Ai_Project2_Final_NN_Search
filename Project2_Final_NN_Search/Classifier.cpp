@@ -27,22 +27,21 @@ vector<vector<double>> Classifier::Normalize(vector<vector<double>> set){
     double sqr_val;
     
 
-    
-    
+    // Loop through each feature column
     for(int i = 1; i < set.size(); i++){
         // current feature column
         curr_feat = set[i];
-    
+        // compute value^2
         for(int j = 0; j < curr_feat.size()-1; j++){
             val_mean_sqr += curr_feat[j] * curr_feat[j];
         }
-
+        // square (value^2)
         sqr_val = sqrt(val_mean_sqr);
         
+        // replace old value with normalized value
         for(int j =0; j<curr_feat.size()-1; j++){
             curr_feat[j] = curr_feat[j]/sqr_val;
         }
-        
         // replace original feature column with normalized version
         set[i] = curr_feat;
         // reset variables in order to reuse
@@ -50,26 +49,36 @@ vector<vector<double>> Classifier::Normalize(vector<vector<double>> set){
         val_mean_sqr = 0;
         curr_feat = {};
     }
-    
+    // return normalized feature set
     return set;
 }
 
 
 double Classifier::Test(int j, vector<vector<double>> set, vector<int> subset){
     
+    // minimum distance between
     double min_dist =2;
+    // holds the modified distance
     double temp_dist;
-    int orig_cls;
-    int predicted_class;
+    // current distance
     double cur_dist = 0;
-    int count =0;
+    // correct class
+    int orig_cls;
+    // predicted class
+    int predicted_class;
+    // feature we want to use (ex: feature = 1, implies use feature 1)
+    int feature;
     
+    // get correct class
     orig_cls = set[0][j];
-    for(int k = 0; k<set[3].size()-1; k++){
+    // cycle through each item in feature set
+    for(int k = 0; k<set[0].size()-1; k++){
+        // make sure test instance != train instance
         if(j != k){
+            // get the subset
             for(int l = 0; l < subset.size(); l++){
-                int feat = subset[l];
-                temp_dist = set[feat][j] - set[feat][k];
+                feature = subset[l];
+                temp_dist = set[feature][j] - set[feature][k];
                 temp_dist = (temp_dist*temp_dist);
                 cur_dist += temp_dist;
             }

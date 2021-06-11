@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <vector>
 #include <iostream>
-#include <ctime>
+#include <time.h>
 
 using namespace std;
 

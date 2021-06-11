@@ -34,7 +34,9 @@ int main(){
     Classifier test;
     Validator val;
     // path to our .txt file
-    string data_path = "/Users/carlos/Downloads/cs_170_large49.txt";
+    string small = "/Users/carlos/Downloads/cs_170_small49.txt";                                                // INSERT YOUR PATH TO YOUR SMALL DATA HERE
+    string large = "/Users/carlos/Downloads/cs_170_large49.txt";    // INSERT YOU PATH TO YOUR LARGE DATA HERE
+    string data_path;
     vector<vector<double>> set; // dataset
     vector<double> temps;
     vector<vector<double>> columns;
@@ -42,13 +44,23 @@ int main(){
     int data_size;
     int data_instances;
     
+    
+    cout << "Welcome to Carlos Loeza & Jeffreyson Nguyen Feature Selection Algorithm" << endl;
+    cout << endl;
+    cout << "Do you want to use small or large dataset? " << endl;
     cout << "Enter 11 for small dataset or enter 41 for large dataset: ";
     cin >> data_size;
+    cout << endl;
     
-    if(data_size == 11)
+    if(data_size == 11){
         data_instances = 100;
-    else
+        data_path = small;
+    } else if (data_size == 41){
         data_instances = 1000;
+        data_path = large;
+    }
+    
+
     
     
     // create 41 empty temp variables to hold an instance from a feature column
@@ -123,18 +135,17 @@ int main(){
                 // create a new vector by inserting or removing i (based on forward or backward selection)
                 temp_vector = search.make_temp_vector(init, i, user_algorithm_pick);
                 
-                temp_vector_score = val.Leave_One_Out(temp_vector, set);
+                temp_vector_score = val.Leave_One_Out(temp_vector, set) / data_instances;
 
                 // print our feature set and the accuracy
                 search.print_features_and_accurary(temp_vector,temp_vector_score);
+                cout << endl;
                 // if new max is found replace temp_max
                 if(search.temp_score_larger(temp_vector_score, temp_max_score)){
                     temp_max = temp_vector;
                     temp_max_score = temp_vector_score;
                 }
             }
-            cout << endl;
-            cout << endl;
         }
         // else not in the first iteration
         else {
@@ -148,12 +159,10 @@ int main(){
                     if(!(find(curr_max.begin(), curr_max.end(), i) != curr_max.end())){
                         // create a new vector by inserting i (forward selection)
                         temp_vector = search.make_temp_vector(curr_max, i, user_algorithm_pick);
-                        temp_vector_score = val.Leave_One_Out(temp_vector, set) ;
+                        temp_vector_score = val.Leave_One_Out(temp_vector, set) / data_instances;
                         // print features and accuracy of current set
                         search.print_features_and_accurary(temp_vector,temp_vector_score);
-                        
-                        cout << "temp score: " << temp_vector_score << endl;
-                        cout << "max score: " << temp_max_score << endl;
+                        cout << endl;
                         // if new max is found replace temp_max
                         if(search.temp_score_larger(temp_vector_score, temp_max_score)){
                             temp_max = temp_vector;
@@ -164,20 +173,17 @@ int main(){
                 } else {
                     // create a new vector by removing i (backward selection)
                     temp_vector = search.make_temp_vector(curr_max, i, user_algorithm_pick);
-                    temp_vector_score = val.Leave_One_Out(temp_vector, set);
+                    temp_vector_score = val.Leave_One_Out(temp_vector, set) / data_instances;
                     // print features and accuracy of current set
                     search.print_features_and_accurary(temp_vector,temp_vector_score);
+                    cout << endl;
                     // if new max is found replace temp_max
-                    
-                    
-                    
                     if(search.temp_score_larger(temp_vector_score, temp_max_score)){
                         temp_max = temp_vector;
                         temp_max_score = temp_vector_score;
                     }
                 }
-                cout << endl;
-                cout << endl;
+
             }
            
         }
@@ -193,9 +199,10 @@ int main(){
         } else {
             hill_climb = false;
         }
+        cout << "----------------------------------------------------";
         cout << endl;
     }
-    
+    cout << endl;
     cout << "Finished search! ";
     search.print_best(curr_max, curr_max_score);
     cout << endl;

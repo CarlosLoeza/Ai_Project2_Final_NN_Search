@@ -11,46 +11,35 @@
     
 double Validator::Leave_One_Out(vector<int> subset, vector<vector<double>> set){
     
-
+    // correct class
     int orig_cls;
+    // predicted class
     int predicted_class;
-    double correct =0; // if correct == 1 match found
+    // total correct predictions
     double correct_predictions = 0; // total # of predicted class == actual class
-
-    
+    // clock timer
+    time_t clock_timer;
+    // loov allows us to run Test from Class Classifier
     Classifier loov;
-        
-    int clock_start, clock_end;
-    
-    cout << "Start timer" << endl;
-    clock_start = clock();
+   
+    // Start timer
+    clock_timer = clock();
 
+    // Loop through each train instance
     for(int j = 0; j<set[0].size()-1; j++){
         //cout << "Row: " << j << endl;
         predicted_class = loov.Test(j, set, subset);
         
         orig_cls = set[0][j];
+        
         if(orig_cls == predicted_class){
-            correct++;
-        }
-
-
-//        cout << "Actual class: " << orig_cls << endl;
-//        cout << "Predicted class: " << predicted_class << endl;
-
-        if(correct == 1)
             correct_predictions++;
-
-
-        correct =0;
-        //cout << "-------------------" << endl;
+        }
     }
+    // Stop timer
+    clock_timer = clock() - clock_timer;
    
-    cout << "End timer" << endl;
-    clock_end = clock();
-    
-    cout << "Total time: " << clock_end - clock_start << endl; 
-    
-    return correct_predictions/1000;
+    cout << "Total time: " <<  ((float)clock_timer)/CLOCKS_PER_SEC << " seconds" << endl;
+    return correct_predictions;
 }
 
