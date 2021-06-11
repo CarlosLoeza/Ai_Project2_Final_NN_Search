@@ -11,14 +11,12 @@
     
 double Validator::Leave_One_Out(vector<int> subset, vector<vector<double>> set){
     
-        
-    double min_dist =2;
-    double temp_dist;
+
     int orig_cls;
-    int cls;
+    int predicted_class;
     double correct =0; // if correct == 1 match found
     double correct_predictions = 0; // total # of predicted class == actual class
-    double cur_dist = 0;
+
     
     Classifier loov;
         
@@ -29,43 +27,21 @@ double Validator::Leave_One_Out(vector<int> subset, vector<vector<double>> set){
 
     for(int j = 0; j<set[0].size()-1; j++){
         cout << "Row: " << j << endl;
+        predicted_class = loov.Test(j, set, subset);
         
-        orig_cls = set[0][j]; // orig index class
-        for(int k = 0; k<set[3].size()-1; k++){
-            if(j != k){
-
-                for(int l = 0; l < subset.size(); l++){
-
-                    int feat = subset[l];
-
-                    // feat3
-                    temp_dist = set[feat][j] - set[feat][k];
-                    temp_dist = (temp_dist*temp_dist);
-                    cur_dist += temp_dist;
-                }
-                cur_dist = sqrt(cur_dist);
-                if(cur_dist < min_dist){
-                    cls = set[0][k];
-                    min_dist = cur_dist;
-                }
-                cur_dist = 0; // reset for next iteration
-            }
-        }
-
-
-        if(orig_cls == cls){
+        orig_cls = set[0][j];
+        if(orig_cls == predicted_class){
             correct++;
         }
 
 
         cout << "Actual class: " << orig_cls << endl;
-        cout << "Predicted class: " << cls << endl;
+        cout << "Predicted class: " << predicted_class << endl;
 
         if(correct == 1)
             correct_predictions++;
 
-        // reset for next iteration
-        min_dist = 2;
+
         correct =0;
         cout << "-------------------" << endl;
     }

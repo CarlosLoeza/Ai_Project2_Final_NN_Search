@@ -18,7 +18,6 @@ int main(){
     vector<vector<double>> set; // dataset
     vector<double> temps;
     vector<vector<double>> columns;
-    double accuracy;
     
     // create 41 empty temp variables to hold an instance from a feature column
     for(int i = 0; i < 41; i++){
@@ -70,15 +69,18 @@ int main(){
     // test print
     for (auto it: set[3])
         cout << it << " - " << endl;
-    
     // test: subset
     vector<int> subset = {1, 15, 27};
 
-    // get accuracy by implementing LOOV
+    double accuracy;
+    
     accuracy = val.Leave_One_Out(subset, set);
     
     cout << "accuracy: " << accuracy/1000 << endl;
 
+    // ---------------------------------------------
+    
 
+    
     return 0;
 }
