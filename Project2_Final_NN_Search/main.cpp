@@ -34,18 +34,24 @@ int main(){
     Classifier test;
     Validator val;
     // path to our .txt file
-    string data_path = "/Users/carlos/Downloads/Large-test-dataset.txt";
+    string data_path = "/Users/carlos/Downloads/cs_170_large49.txt";
     vector<vector<double>> set; // dataset
     vector<double> temps;
     vector<vector<double>> columns;
     double accuracy;
+    int data_size;
+    
+    cout << "Enter 11 for small dataset or enter 41 for large dataset: ";
+    cin >> data_size;
+    
+    
     
     // create 41 empty temp variables to hold an instance from a feature column
-    for(int i = 0; i < 41; i++){
+    for(int i = 0; i < data_size; i++){
         temps.push_back(-1);
     }
     // create 41 empty columns to hold each feature column from dataset
-    for(int i =0; i<41; i++){
+    for(int i =0; i<data_size; i++){
         columns.push_back({});
         
     }
@@ -191,28 +197,6 @@ int main(){
     cout << endl;
     
     
-    
-    
-    
-    
-    
-    
-    //////////////////////////////////////////////////////////////////////
-//    // test print
-//    for (auto it: set[3])
-//        cout << it << " - " << endl;
-//    // test: subset
-//    vector<int> subset = {3, 5, 7};
-//
-//    double accuracy;
-//
-//    accuracy = val.Leave_One_Out(subset, set);
-//
-//    cout << "accuracy: " << accuracy/100 << endl;
-
-    // ---------------------------------------------
-    
-
     
     return 0;
 }
