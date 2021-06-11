@@ -22,7 +22,7 @@ int main(){
     vector<int> curr_max = {};  // holds the current max state
     double curr_max_score = -1; // the max score based on curr max
     vector<int> temp_max = {};  // holds the best feature set of parent while it checks other children score
-    double temp_max_score = 0;  // accuracy of temp_max feature set
+    double temp_max_score = -1;  // accuracy of temp_max feature set
     bool hill_climb = true;     // makes sure the child is larger than parent for our greedy search
     int i_val;                  // value assigned to our i for the for-loop's
     int i_less;                 // less than value for our for-loop
@@ -34,18 +34,18 @@ int main(){
     Classifier test;
     Validator val;
     // path to our .txt file
-    string data_path = "/Users/carlos/Downloads/small-test-dataset.txt";
+    string data_path = "/Users/carlos/Downloads/Large-test-dataset.txt";
     vector<vector<double>> set; // dataset
     vector<double> temps;
     vector<vector<double>> columns;
     double accuracy;
     
     // create 41 empty temp variables to hold an instance from a feature column
-    for(int i = 0; i < 11; i++){
+    for(int i = 0; i < 41; i++){
         temps.push_back(-1);
     }
     // create 41 empty columns to hold each feature column from dataset
-    for(int i =0; i<11; i++){
+    for(int i =0; i<41; i++){
         columns.push_back({});
         
     }
@@ -100,7 +100,7 @@ int main(){
         i_less = user_features; // plus 1 since we are starting with one (int i =1)
     } else {
         i_val = 0;
-        i_less = init.size();
+        i_less = init.size()-1;
     }
     
 
@@ -111,6 +111,7 @@ int main(){
             for(int i = i_val; i<i_less; i++){
                 // create a new vector by inserting or removing i (based on forward or backward selection)
                 temp_vector = search.make_temp_vector(init, i, user_algorithm_pick);
+
                 
                 temp_vector_score = val.Leave_One_Out(temp_vector, set);
 
@@ -140,6 +141,9 @@ int main(){
                         temp_vector_score = val.Leave_One_Out(temp_vector, set);
                         // print features and accuracy of current set
                         search.print_features_and_accurary(temp_vector,temp_vector_score);
+                        
+                        cout << "temp score: " << temp_vector_score << endl;
+                        cout << "max score: " << temp_max_score << endl;
                         // if new max is found replace temp_max
                         if(search.temp_score_larger(temp_vector_score, temp_max_score)){
                             temp_max = temp_vector;
@@ -154,13 +158,18 @@ int main(){
                     // print features and accuracy of current set
                     search.print_features_and_accurary(temp_vector,temp_vector_score);
                     // if new max is found replace temp_max
+                    
+                    
+                    
                     if(search.temp_score_larger(temp_vector_score, temp_max_score)){
                         temp_max = temp_vector;
                         temp_max_score = temp_vector_score;
                     }
                 }
+                cout << endl;
+                cout << endl;
             }
-            cout << endl;
+           
         }
 
         

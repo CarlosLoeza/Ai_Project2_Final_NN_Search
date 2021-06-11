@@ -51,6 +51,6 @@ double Validator::Leave_One_Out(vector<int> subset, vector<vector<double>> set){
     
     cout << "Total time: " << clock_end - clock_start << endl; 
     
-    return correct_predictions;
+    return correct_predictions/1000;
 }
 
