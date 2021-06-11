@@ -26,7 +26,7 @@ double Validator::Leave_One_Out(vector<int> subset, vector<vector<double>> set){
     clock_start = clock();
 
     for(int j = 0; j<set[0].size()-1; j++){
-        cout << "Row: " << j << endl;
+        //cout << "Row: " << j << endl;
         predicted_class = loov.Test(j, set, subset);
         
         orig_cls = set[0][j];
@@ -35,15 +35,15 @@ double Validator::Leave_One_Out(vector<int> subset, vector<vector<double>> set){
         }
 
 
-        cout << "Actual class: " << orig_cls << endl;
-        cout << "Predicted class: " << predicted_class << endl;
+//        cout << "Actual class: " << orig_cls << endl;
+//        cout << "Predicted class: " << predicted_class << endl;
 
         if(correct == 1)
             correct_predictions++;
 
 
         correct =0;
-        cout << "-------------------" << endl;
+        //cout << "-------------------" << endl;
     }
    
     cout << "End timer" << endl;

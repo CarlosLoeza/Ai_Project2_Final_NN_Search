@@ -10,6 +10,7 @@
 		0794C9D5266F22ED00A81BEC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0794C9D4266F22ED00A81BEC /* main.cpp */; };
 		0794C9E0266F23BE00A81BEC /* Classifier.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0794C9DE266F23BE00A81BEC /* Classifier.cpp */; };
 		0794C9E1266F23BE00A81BEC /* Validator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0794C9DF266F23BE00A81BEC /* Validator.cpp */; };
+		0794C9EA2673144A00A81BEC /* Problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0794C9E92673144A00A81BEC /* Problem.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,8 @@
 		0794C9DE266F23BE00A81BEC /* Classifier.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Classifier.cpp; sourceTree = "<group>"; };
 		0794C9DF266F23BE00A81BEC /* Validator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Validator.cpp; sourceTree = "<group>"; };
 		0794C9E3266F23D900A81BEC /* Classifier.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Classifier.hpp; sourceTree = "<group>"; };
+		0794C9E82673144900A81BEC /* Problem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Problem.hpp; path = ../../../../../Desktop/Problem.hpp; sourceTree = "<group>"; };
+		0794C9E92673144A00A81BEC /* Problem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Problem.cpp; path = ../../../../../Desktop/Problem.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +67,8 @@
 			isa = PBXGroup;
 			children = (
 				0794C9D4266F22ED00A81BEC /* main.cpp */,
+				0794C9E82673144900A81BEC /* Problem.hpp */,
+				0794C9E92673144A00A81BEC /* Problem.cpp */,
 				0794C9E3266F23D900A81BEC /* Classifier.hpp */,
 				0794C9DE266F23BE00A81BEC /* Classifier.cpp */,
 				0794C9DF266F23BE00A81BEC /* Validator.cpp */,
@@ -129,6 +134,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0794C9E0266F23BE00A81BEC /* Classifier.cpp in Sources */,
+				0794C9EA2673144A00A81BEC /* Problem.cpp in Sources */,
 				0794C9E1266F23BE00A81BEC /* Validator.cpp in Sources */,
 				0794C9D5266F22ED00A81BEC /* main.cpp in Sources */,
 			);

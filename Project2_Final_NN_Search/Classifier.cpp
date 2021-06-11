@@ -62,24 +62,24 @@ double Classifier::Test(int j, vector<vector<double>> set, vector<int> subset){
     int orig_cls;
     int predicted_class;
     double cur_dist = 0;
+    int count =0;
     
     orig_cls = set[0][j];
     for(int k = 0; k<set[3].size()-1; k++){
-               if(j != k){
-                   for(int l = 0; l < subset.size(); l++){
-                       int feat = subset[l];
-                       
-                       temp_dist = set[feat][j] - set[feat][k];
-                       temp_dist = (temp_dist*temp_dist);
-                       cur_dist += temp_dist;
-                   }
-                   cur_dist = sqrt(cur_dist);
-                   if(cur_dist < min_dist){
-                       predicted_class = set[0][k];
-                       min_dist = cur_dist;
-                   }
-                   cur_dist = 0; // reset for next iteration
-               }
+        if(j != k){
+            for(int l = 0; l < subset.size(); l++){
+                int feat = subset[l];
+                temp_dist = set[feat][j] - set[feat][k];
+                temp_dist = (temp_dist*temp_dist);
+                cur_dist += temp_dist;
+            }
+            cur_dist = sqrt(cur_dist);
+            if(cur_dist < min_dist){
+                predicted_class = set[0][k];
+                min_dist = cur_dist;
+            }
+            cur_dist = 0; // reset for next iteration
+        }
     }
     return predicted_class;
 }
