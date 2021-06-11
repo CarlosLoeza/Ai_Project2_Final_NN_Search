@@ -9,58 +9,52 @@
 using namespace std;
 
 
-
 int main(){
     
     Classifier test;
     Validator val;
     // path to our .txt file
-    string data_path = "/Users/carlos/Downloads/cs_170_small80.txt";
+    string data_path = "/Users/carlos/Downloads/Large-test-dataset.txt";
     vector<vector<double>> set; // dataset
+    vector<double> temps;
+    vector<vector<double>> columns;
+    double accuracy;
     
-    // temp variables for each column(feature column) so we can push it to the desired vector
-    // ex: t_feature1 will be pushed to feature1
-    double t_classification, t_feature1, t_feature2, t_feature3, t_feature4, t_feature5, t_feature6, t_feature7, t_feature8, t_feature9, t_feature10;
+    // create 41 empty temp variables to hold an instance from a feature column
+    for(int i = 0; i < 41; i++){
+        temps.push_back(-1);
+    }
+    // create 41 empty columns to hold each feature column from dataset
+    for(int i =0; i<41; i++){
+        columns.push_back({});
+        
+    }
     
-    
-    vector<double> classification, feature1, feature2, feature3, feature4, feature5, feature6, feature7, feature8, feature9, feature10;
     
     // Read the contents of our file
     ifstream inFile;
     inFile.open(data_path);
     // Read data until we reach the end
     while (inFile) {
-        // assing values to our temp variables
-        inFile >> t_classification >> t_feature1 >> t_feature2 >> t_feature3 >> t_feature4 >> t_feature5 >> t_feature6 >> t_feature7 >> t_feature8 >> t_feature9 >> t_feature10;
-        // push temp values to the desired vector
-        classification.push_back(t_classification);
-        feature1.push_back(t_feature1);
-        feature2.push_back(t_feature2);
-        feature3.push_back(t_feature3);
-        feature4.push_back(t_feature4);
-        feature5.push_back(t_feature5);
-        feature6.push_back(t_feature6);
-        feature7.push_back(t_feature7);
-        feature8.push_back(t_feature8);
-        feature9.push_back(t_feature9);
-        feature10.push_back(t_feature10);
+        // assing feature instance to our temp variables
+        for(int j = 0; j<temps.size(); j++){
+            inFile >> temps[j];
+        }
+        // push instances to desired column. (ex: an instance from feature 1 will be pushed to column 1
+        for(int j=0; j<temps.size(); j++){
+            columns[j].push_back(temps[j]);
+        }
+
     }
     // done reading .txt file
     inFile.close();
     
-    set.push_back(classification);
-    set.push_back(feature1);
-    set.push_back(feature2);
-    set.push_back(feature3);
-    set.push_back(feature4);
-    set.push_back(feature5);
-    set.push_back(feature6);
-    set.push_back(feature7);
-    set.push_back(feature8);
-    set.push_back(feature9);
-    set.push_back(feature10);
-    
-    
+    // push our columns to our set which holds our the classification and feature vectors
+    for(int j = 0; j<columns.size(); j++){
+        set.push_back(columns[j]);
+    }
+
+    // test print
     for (auto it: set[3])
         cout << it << endl;
     cout << endl;
@@ -73,20 +67,18 @@ int main(){
     // test: check if normalized
     cout << endl;
     
+    // test print
     for (auto it: set[3])
         cout << it << " - " << endl;
-    // test: subset
-    vector<int> subset = {3, 5, 7};
-
-    double accuracy;
     
+    // test: subset
+    vector<int> subset = {1, 15, 27};
+
+    // get accuracy by implementing LOOV
     accuracy = val.Leave_One_Out(subset, set);
     
-    cout << "accuracy: " << accuracy << endl;
+    cout << "accuracy: " << accuracy/1000 << endl;
 
-    // ---------------------------------------------
-    
 
-    
     return 0;
 }

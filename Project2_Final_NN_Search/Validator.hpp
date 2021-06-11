@@ -11,6 +11,8 @@
 #include <stdio.h>
 #include <vector>
 #include <iostream>
+#include <ctime>
+
 using namespace std;
 
 class Validator{

@@ -17,13 +17,19 @@ double Validator::Leave_One_Out(vector<int> subset, vector<vector<double>> set){
     int orig_cls;
     int cls;
     double correct =0; // if correct == 1 match found
-    double total_correct = 0; // total # of predicted class == actual class
+    double correct_predictions = 0; // total # of predicted class == actual class
     double cur_dist = 0;
+    
+    Classifier loov;
         
+    int clock_start, clock_end;
+    
+    cout << "Start timer" << endl;
+    clock_start = clock();
 
-
-    for(int j = 0; j<set[3].size()-1; j++){
+    for(int j = 0; j<set[0].size()-1; j++){
         cout << "Row: " << j << endl;
+        
         orig_cls = set[0][j]; // orig index class
         for(int k = 0; k<set[3].size()-1; k++){
             if(j != k){
@@ -56,7 +62,7 @@ double Validator::Leave_One_Out(vector<int> subset, vector<vector<double>> set){
         cout << "Predicted class: " << cls << endl;
 
         if(correct == 1)
-            total_correct++;
+            correct_predictions++;
 
         // reset for next iteration
         min_dist = 2;
@@ -64,6 +70,11 @@ double Validator::Leave_One_Out(vector<int> subset, vector<vector<double>> set){
         cout << "-------------------" << endl;
     }
    
-    return total_correct;
+    cout << "End timer" << endl;
+    clock_end = clock();
+    
+    cout << "Total time: " << clock_end - clock_start << endl; 
+    
+    return correct_predictions;
 }
 
