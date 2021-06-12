@@ -19,6 +19,5 @@ class Validator{
 public:
     double Leave_One_Out(vector<int> subset, vector<vector<double>> set);
     
-    
 };
 #endif /* Validator_hpp */

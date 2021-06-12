@@ -34,7 +34,7 @@ int main(){
     Classifier test;
     Validator val;
     // path to our .txt file
-    string small = "/Users/carlos/Downloads/cs_170_small49.txt";                                                // INSERT YOUR PATH TO YOUR SMALL DATA HERE
+    string small = "/Users/carlos/Downloads/cs_170_small49.txt";    // INSERT YOUR PATH TO YOUR SMALL DATA HERE
     string large = "/Users/carlos/Downloads/cs_170_large49.txt";    // INSERT YOU PATH TO YOUR LARGE DATA HERE
     string data_path;
     vector<vector<double>> set; // dataset
@@ -52,17 +52,18 @@ int main(){
     cin >> data_size;
     cout << endl;
     
+    // small data == 11
+    // determines the path of our .txt file
     if(data_size == 11){
         data_instances = 100;
         data_path = small;
+    // large data = 41
     } else if (data_size == 41){
         data_instances = 1000;
         data_path = large;
     }
     
 
-    
-    
     // create 41 empty temp variables to hold an instance from a feature column
     for(int i = 0; i < data_size; i++){
         temps.push_back(-1);
@@ -102,8 +103,7 @@ int main(){
     //test.Train(data_path);
     // normalize vectors and update our dataset to be normalized
     set = test.Normalize(set);
-
-
+    
     
     // User selects the amount of features they want
     user_features = set.size();
@@ -183,9 +183,7 @@ int main(){
                         temp_max_score = temp_vector_score;
                     }
                 }
-
             }
-           
         }
 
         
@@ -206,8 +204,6 @@ int main(){
     cout << "Finished search! ";
     search.print_best(curr_max, curr_max_score);
     cout << endl;
-    
-    
     
     return 0;
 }
